@@ -1,5 +1,20 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# Working directories - not tracked
+.scratch/
+GUIDES/
+PLANS/
+REPOS/
+RESEARCH/
+WORK_LOGS/
+
+# Utilities (local tools, not tracked)
+UTILITIES/
+
+# Beads issue tracker
+.beads/
+.beads-ui/
+
 # compiled output
 dist
 bin
