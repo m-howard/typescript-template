@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - val
+          - prd
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  deploy:
+    name: 'Deploy'
+    needs: determine-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: 
+      name: ${{ needs.determine-environment.outputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
