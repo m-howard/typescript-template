@@ -36,4 +36,4 @@ RUN pip install uv
 
 RUN curl -sS https://starship.rs/install.sh | sh -s -- -y
 
-COPY .devcontainer.zshrc /home/vscode/
+COPY .devcontainer/.zshrc /home/vscode/

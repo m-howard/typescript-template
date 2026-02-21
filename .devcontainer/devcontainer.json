@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
-    "name": "Typescript Starter",
+    "name": "Typescript AI Template",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     // "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye",
     "build": {
@@ -48,6 +48,15 @@
         "vscode": {
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "bash",
+                        "icon": "terminal-bash"
+                    },
+                    "zsh": {
+                        "path": "zsh"
+                    }
+                },
                 "editor.formatOnSave": true,
                 "typescript.tsserver.log": "verbose",
                 "typescript.tsserver.trace": "verbose",
@@ -70,8 +79,31 @@
                 "firsttris.vscode-jest-runner",
                 "mikestead.dotenv",
                 "DavidAnson.vscode-markdownlint",
-                "dbaeumer.vscode-eslint"
-            ]
+                "dbaeumer.vscode-eslint",
+                "github.vscode-github-actions",
+                "GitHub.copilot-chat",
+                "openai.chatgpt"
+            ],
+            "mcp": {
+                "servers": {
+                    "playwright": {
+                        "command": "npx",
+                        "args": ["-y", "@playwright/mcp@latest"]
+                    },
+                    "context7": {
+                        "command": "npx",
+                        "args": ["-y", "@upstash/context7-mcp"]
+                    },
+                    "beads": {
+                        "command": "uvx",
+                        "args": ["beads-mcp"]
+                    },
+                    "devTools": {
+                        "command": "npx",
+                        "args": ["-y", "chrome-devtools-mcp@latest"]
+                    }
+                }
+            }
         }
     }
 
