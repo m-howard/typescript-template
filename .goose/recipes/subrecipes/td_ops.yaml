@@ -1,0 +1,38 @@
+title: "Tech Design Section 4C Draft (Operational Readiness)"
+description: "Drafts operational readiness: support, deploy, monitoring, scaling, testing."
+
+instructions: |
+  Cover 4.3 only. Include concrete runbook and ownership placeholders.
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+
+  Write {{ work_dir }}/sections/04c_ops.md containing:
+
+  ## 4.3 Operational readiness strategy
+  ### 4.3.0 Service Support
+  ### 4.3.1 Service deployment
+  ### 4.3.2 Compliance
+  ### 4.3.3 Integration testing and canaries
+  ### 4.3.4 Monitoring/alarming
+  ### 4.3.5 Scaling
+  ### 4.3.6 Patching/Maintainability/Tech Debt Strategy
+  ### 4.3.7 User Access Strategy
+
+  Then:
+  ### Open Questions

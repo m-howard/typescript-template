@@ -1,0 +1,36 @@
+title: "Tech Design Section 4B Draft (Cost + Data)"
+description: "Drafts cost considerations and data strategy."
+
+instructions: |
+  Cover:
+  - 4.1 Cost Considerations
+  - 4.2 Data Strategy (schemas placeholders, privacy, retention)
+  Make explicit trade-offs and assumptions. End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+
+  Write {{ work_dir }}/sections/04b_cost_and_data.md containing:
+
+  ## 4.1 Cost Considerations
+  ## 4.2 Data Strategy
+  ### 4.2.0 <Resource> Table
+  ### 4.2.1 Privacy Considerations (if PII/PHI present)
+  ### 4.2.2 Data Retention strategy
+
+  Then:
+  ### Open Questions

@@ -1,0 +1,42 @@
+title: "Tech Design Section 3 Draft (Requirements)"
+description: "Drafts user stories, NFRs, and SLOs with traceability to EARS."
+
+instructions: |
+  Convert EARS into:
+  - user stories (where appropriate)
+  - NFRs (latency, availability, throughput, recovery, retention)
+  - explicit SLOs (availability, error rate, latency, etc.)
+  Include a traceability table or bullet mapping from EARS IDs -> design elements.
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+  - key: ears_path
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+  If needed, open {{ ears_path }} and pull specific requirement IDs.
+
+  Write {{ work_dir }}/sections/03_requirements.md containing:
+
+  # 3 Requirements
+  ## 3.0 User stories
+  ## 3.1 Non-Functional Requirements
+  ## 3.2 Service Level Objectives (SLOs)
+
+  Then:
+  ### Traceability (EARS -> Design)
+  ### Open Questions

@@ -1,0 +1,35 @@
+title: "Tech Design Section 4E Draft (Backup/DR/HA)"
+description: "Drafts backup scope, DR plan, HA, validation, and failover readiness."
+
+instructions: |
+  Cover 4.5 only. Include RPO/RTO and test frequency.
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+
+  Write {{ work_dir }}/sections/04e_dr_ha.md containing:
+
+  ## 4.5 Backup, DR, HA Strategy
+  ### 4.5.0 Backup Scope and Frequency
+  ### 4.5.1 Disaster Recovery Plan
+  ### 4.5.2 High Availability Design
+  ### 4.5.3 Data Restoration Validation
+  ### 4.5.4 Failover Readiness
+
+  Then:
+  ### Open Questions

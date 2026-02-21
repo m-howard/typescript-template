@@ -1,0 +1,32 @@
+title: "Tech Design Section 2 Draft (Scope)"
+description: "Drafts Scope: in-scope and out-of-scope."
+
+instructions: |
+  Use digest and source docs only as needed.
+  Ensure scope is testable: items should be phrased so a reviewer can tell if it's delivered or not.
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+  Write {{ work_dir }}/sections/02_scope.md containing:
+
+  # 2 Scope
+  ## 2.0 In scope
+  ## 2.1 Out of scope
+
+  Then:
+  ### Open Questions

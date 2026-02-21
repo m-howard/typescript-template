@@ -1,0 +1,49 @@
+title: "Tech Design Section 5 Draft (Appendix)"
+description: "Drafts appendix links and artifact index."
+
+instructions: |
+  Include links/pointers to:
+  - vision, requirements, tech specs
+  - diagrams placeholders
+  - related ADRs/runbooks (if known)
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+  - key: vision_path
+    input_type: string
+    requirement: required
+  - key: ears_path
+    input_type: string
+    requirement: required
+  - key: tech_specs_path
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Write {{ work_dir }}/sections/05_appendix.md containing:
+
+  # 5 Appendix
+  - Vision: {{ vision_path }}
+  - EARS Requirements: {{ ears_path }}
+  - Technical Specs: {{ tech_specs_path }}
+  - Diagrams:
+    - [Lucidchart]()
+  - Runbooks:
+    - [TODO]()
+  - ADRs:
+    - [TODO]()
+
+  Then:
+  ### Open Questions

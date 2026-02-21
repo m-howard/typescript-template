@@ -1,0 +1,54 @@
+title: "Inputs Digest Builder"
+description: "Creates a compact digest of Vision + EARS + Tech Specs for downstream section drafting."
+
+instructions: |
+  Build a concise digest to minimize repeated reading of large source docs.
+  - Read the three input documents from paths.
+  - Extract: problem, goals, non-goals, stakeholders, constraints, assumptions, key EARS requirements, NFRs, known integrations, and any architecture constraints.
+  - Output a single markdown digest file at: {{ work_dir }}/inputs_digest.md
+  - Include a short 'Traceability' mapping: Vision bullets -> requirement IDs -> spec sections.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: vision_path
+    input_type: string
+    requirement: required
+  - key: ears_path
+    input_type: string
+    requirement: required
+  - key: tech_specs_path
+    input_type: string
+    requirement: required
+  - key: existing_design_path
+    input_type: string
+    requirement: optional
+    default: ""
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Create {{ work_dir }} if missing.
+  Read:
+  - {{ vision_path }}
+  - {{ ears_path }}
+  - {{ tech_specs_path }}
+  If {{ existing_design_path }} is non-empty and exists, skim it to understand current state and what's already decided.
+
+  Write a concise digest to {{ work_dir }}/inputs_digest.md with:
+  - Overview (max 10 bullets)
+  - Key decisions already made (if any)
+  - Requirements index (EARS IDs/titles)
+  - NFRs + SLO targets
+  - Integration inventory
+  - Risks/unknowns
+
+  Keep it short and scannable (aim: 1–2 pages).

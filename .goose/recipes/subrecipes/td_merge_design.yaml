@@ -1,0 +1,36 @@
+title: "Tech Design Merge Sections"
+description: "Merges section drafts into a single final technical design document."
+
+instructions: |
+  Merge the section files in numeric order into the final output.
+  Ensure headings remain exactly as drafted.
+  If output_path exists, overwrite it with the merged result.
+
+parameters:
+  - key: work_dir
+    input_type: string
+    requirement: required
+  - key: output_path
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Merge:
+    {{ work_dir }}/sections/01_background.md
+    {{ work_dir }}/sections/02_scope.md
+    {{ work_dir }}/sections/03_requirements.md
+    {{ work_dir }}/sections/04a_arch_and_apis.md
+    {{ work_dir }}/sections/04b_cost_and_data.md
+    {{ work_dir }}/sections/04c_ops.md
+    {{ work_dir }}/sections/04d_security.md
+    {{ work_dir }}/sections/04e_dr_ha.md
+    {{ work_dir }}/sections/05_appendix.md
+
+  Write the merged result to {{ output_path }}.
+  Use shell cat (or equivalent) for deterministic ordering.

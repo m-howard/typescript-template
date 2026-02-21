@@ -1,0 +1,181 @@
+title: "Technical Design Writer"
+description: "Builds/updates a technical design doc from Vision + EARS + Technical Specs using section-by-section drafting, then merges into one final document."
+
+nstructions: |
+  You are the technical design lead.
+
+  Inputs:
+  - Vision doc path: {{ vision_path }}
+  - EARS requirements doc path: {{ ears_path }}
+  - Technical specs doc path: {{ tech_specs_path }}
+  - Existing technical design doc path (optional): {{ existing_design_path }}
+
+  Output:
+  - Final merged design doc: {{ output_path }}
+  - Working directory: {{ work_dir }}
+  - Section drafts directory: {{ work_dir }}/sections
+
+  Core rules:
+  1) Work in small chunks to avoid context overload:
+     - First create a concise "Inputs Digest" file.
+     - Then draft each section as its own markdown file in {{ work_dir }}/sections.
+     - Finally merge all section files into {{ output_path }}.
+  2) Ask questions along the way:
+     - After drafting each section, produce an "Open Questions" list (max 7).
+     - Pause and ask the user those questions before proceeding; if user says "skip", continue and mark TODOs in the section.
+  3) If updating an existing design:
+     - Preserve content that is still correct.
+     - Only rewrite sections that changed, using precise edits rather than rewriting the entire doc when possible.
+  4) Use the Developer extension tools for file work and merging:
+     - Use text_editor for reading/writing/editing files.
+     - Use shell for directory creation and concatenation/merging.
+
+  Final document must follow this template skeleton (keep headings consistent):
+  Design
+
+  ## 1.0 Problem
+  ## 1.1 Solution
+  ## 1.2 Key Stakeholders
+  ## 1.3 Assumptions
+  ## 1.4 Constraints
+
+  # 2 Scope
+  ## 2.0 In scope
+  ## 2.1 Out of scope
+
+  # 3 Requirements
+  ## 3.0 User stories
+  ## 3.1 Non-Functional Requirements
+  ## 3.2 Service Level Objectives (SLOs)
+
+  # 4 Solution
+  ## 4.0 Solution A
+  ### 4.0.0 Architecture
+  ### 4.0.1 Integration Points
+  ## 4.1 Cost Considerations
+  ## 4.2 Data Strategy
+  ## 4.3 Operational readiness strategy
+  ## 4.4 Security strategy
+  ## 4.5 Backup, DR, HA Strategy
+
+  # 5 Appendix
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+    description: "Short project/system name"
+
+  - key: vision_path
+    input_type: string
+    requirement: required
+    description: "Path to vision document (markdown or text)"
+
+  - key: ears_path
+    input_type: string
+    requirement: required
+    description: "Path to EARS requirements document"
+
+  - key: tech_specs_path
+    input_type: string
+    requirement: required
+    description: "Path to technical specs document"
+
+  - key: existing_design_path
+    input_type: string
+    requirement: optional
+    default: ""
+    description: "Optional path to an existing technical design doc to update"
+
+  - key: output_path
+    input_type: string
+    requirement: optional
+    default: "TECHNICAL_DESIGN.md"
+    description: "Where to write the merged final design document"
+
+  - key: work_dir
+    input_type: string
+    requirement: optional
+    default: ".tdd_work"
+    description: "Working directory for digest + section drafts"
+
+  - key: generate_jira
+    input_type: boolean
+    requirement: optional
+    default: "false"
+    description: "Whether to generate Jira backlog artifacts after merging"
+
+  - key: jira_project_key
+    input_type: string
+    requirement: optional
+    default: ""
+    description: "Jira project key for ticket generation (e.g., PAY)"
+
+sub_recipes:
+  - name: make_digest
+    path: "./subrecipes/make_digest.yaml"
+
+  - name: section_01_background
+    path: "./subrecipes/section_01_background.yaml"
+
+  - name: section_02_scope
+    path: "./subrecipes/section_02_scope.yaml"
+
+  - name: section_03_requirements
+    path: "./subrecipes/section_03_requirements.yaml"
+
+  - name: section_04a_arch_and_apis
+    path: "./subrecipes/section_04a_arch_and_apis.yaml"
+
+  - name: section_04b_cost_and_data
+    path: "./subrecipes/section_04b_cost_and_data.yaml"
+
+  - name: section_04c_ops
+    path: "./subrecipes/section_04c_ops.yaml"
+
+  - name: section_04d_security
+    path: "./subrecipes/section_04d_security.yaml"
+
+  - name: section_04e_dr_ha
+    path: "./subrecipes/section_04e_dr_ha.yaml"
+
+  - name: section_05_appendix
+    path: "./subrecipes/section_05_appendix.yaml"
+
+  - name: merge_design
+    path: "./subrecipes/merge_design.yaml"
+
+  - name: jira_backlog
+    path: "./subrecipes/jira_backlog.yaml"
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+activities:
+  - "message: **Technical Design Writer**\n\nThis workflow drafts a design doc section-by-section into `{{ work_dir }}/sections/`, asks questions after each section, then merges into `{{ output_path }}`."
+  - "Build/update the technical design for {{ project_name }}"
+  - "Generate Jira backlog artifacts (set generate_jira=true)"
+
+prompt: |
+  Start by ensuring {{ work_dir }}/sections exists.
+  Then run subrecipes in this order:
+  1) make_digest
+  2) section_01_background (ask its questions; wait for answers or 'skip')
+  3) section_02_scope (ask questions)
+  4) section_03_requirements (ask questions)
+  5) section_04a_arch_and_apis (ask questions)
+  6) section_04b_cost_and_data (ask questions)
+  7) section_04c_ops (ask questions)
+  8) section_04d_security (ask questions)
+  9) section_04e_dr_ha (ask questions)
+  10) section_05_appendix (ask questions)
+  11) merge_design to produce {{ output_path }}
+
+  If generate_jira is true, run jira_backlog last and write outputs under {{ work_dir }}/jira/.
+
+  Important:
+  - Keep each subrecipe’s work limited to its section file.
+  - Use precise edits when updating existing content.

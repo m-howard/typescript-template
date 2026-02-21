@@ -1,0 +1,44 @@
+title: "Tech Design Section 4A Draft (Architecture + APIs)"
+description: "Drafts architecture inventory and integration/API contracts."
+
+instructions: |
+  Focus only on:
+  - 4.0 Solution A
+  - 4.0.0 Architecture (components inventory + diagram placeholder)
+  - 4.0.1 Integration Points (API definitions, idempotency, validation, models, errors)
+  Use concise, implementation-ready language. End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+  - key: tech_specs_path
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+  If needed, open {{ tech_specs_path }} for API/system details.
+
+  Write {{ work_dir }}/sections/04a_arch_and_apis.md containing:
+
+  # 4 Solution
+  ## 4.0 Solution A
+  ### 4.0.0 Architecture
+  [Lucidchart link/Diagram]()
+  - Components inventory:
+    - ...
+  ### 4.0.1 Integration Points
+  (Include one or more API definitions using the template style.)
+
+  Then:
+  ### Open Questions

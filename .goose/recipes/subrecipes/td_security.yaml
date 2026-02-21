@@ -1,0 +1,38 @@
+title: "Tech Design Section 4D Draft (Security)"
+description: "Drafts authentication/authorization, network security, logging, secrets, throttling, threat model."
+
+instructions: |
+  Cover 4.4 only.
+  Be explicit about AuthN vs AuthZ and permission boundaries.
+  End with Open Questions.
+
+parameters:
+  - key: project_name
+    input_type: string
+    requirement: required
+  - key: work_dir
+    input_type: string
+    requirement: required
+
+extensions:
+  - type: builtin
+    name: developer
+    timeout: 300
+    bundled: true
+
+prompt: |
+  Read {{ work_dir }}/inputs_digest.md.
+
+  Write {{ work_dir }}/sections/04d_security.md containing:
+
+  ## 4.4 Security strategy
+  ### 4.4.0 AuthN/AuthZ strategy
+  ### 4.4.1 Network Security Strategy
+  ### 4.4.2 Logging Strategy
+  ### 4.4.3 Throttling strategy
+  ### 4.4.4 Secrets Management
+  ### 4.4.5 CI/CD Deployment security
+  ### 4.4.6 Threat model
+
+  Then:
+  ### Open Questions
