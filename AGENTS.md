@@ -364,3 +364,19 @@ This project is designed to work in dev containers and includes:
 - **Multi-Region Support**: Design components to be region-agnostic where possible, with us-east-1 as the default region.
 
 When generating infrastructure code, always consider the existing patterns and maintain consistency with the established AWS architecture and Pulumi best practices.
+
+## Available Skills
+
+Specialized agent skills are located in `.agents/skills/`. Invoke the appropriate skill for the following tasks:
+
+| Skill | When to Use |
+|---|---|
+| `product-manager-agent` | Define or clarify a project's problem statement, solution scope, and success criteria |
+| `requirements-writer` | Translate problem/solution statements into structured functional requirements (FR-001 style) |
+| `tech-researcher` | Research technology choices, evaluate options, and compare architectural patterns |
+| `data-architect` | Design data models, schemas, and ERDs for new features or storage layers |
+| `rest-api-architect` | Design REST API contracts, endpoint catalogs, and OpenAPI specs |
+| `jira-breakdown` | Break down PRDs, architecture docs, or feature specs into a Jira issue hierarchy |
+| `pulumi-component-architect` | Design Pulumi `ComponentResource` classes, stack composition, and cross-stack references for AWS infrastructure |
+| `aws-security-reviewer` | Review AWS infrastructure code for security misconfigurations, IAM least-privilege violations, and compliance gaps |
+| `runbook-writer` | Write deployment runbooks, incident response procedures, and troubleshooting guides for infrastructure operations |
